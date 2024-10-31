@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent {
   email: string = '';
   password: string = '';
@@ -18,7 +19,6 @@ export class LoginComponent {
     console.log('Password:', this.password);
 
     if (this.email === 'jerald@gmail.com' && this.password === '123') {
-      // Pass email as a query parameter
       this.router.navigate(['/'], { queryParams: { email: this.email } });
     } else {
       this.errorMessage = 'Invalid email or password. Please try again.';
