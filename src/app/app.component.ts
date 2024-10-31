@@ -5,11 +5,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; 
 import { LoginComponent } from './login/login.component'; 
 import { AppNavbarComponent } from './navbar/navbar.component';
-
+import { FooterComponent } from './footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, AppNavbarComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -20,11 +20,12 @@ export class AppComponent {
 @NgModule({
   declarations: [
     LoginComponent,
-    AppNavbarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule 
+  ],
+  exports: [
   ],
   providers: [],
   bootstrap: [AppComponent]

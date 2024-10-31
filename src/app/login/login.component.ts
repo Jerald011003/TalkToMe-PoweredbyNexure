@@ -9,16 +9,19 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  errorMessage: string = ''; 
 
   constructor(private router: Router) {}
 
   onSubmit() {
-    // Here you would typically make a request to your backend for authentication
     console.log('Email:', this.email);
     console.log('Password:', this.password);
 
-    // Navigate to the home page after successful login
-    // You can replace this with actual authentication logic
-    this.router.navigate(['/']);
+    if (this.email === 'jerald@gmail.com' && this.password === '123') {
+      // Pass email as a query parameter
+      this.router.navigate(['/'], { queryParams: { email: this.email } });
+    } else {
+      this.errorMessage = 'Invalid email or password. Please try again.';
+    }
   }
 }

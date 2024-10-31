@@ -1,12 +1,20 @@
-<nav class="navbar">
-    <div class="container">
-      <a routerLink="/" class="logo">MyApp</a>
-      <ul class="nav-links">
-        <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/login">Login</a></li>
-        <li><a routerLink="/register">Register</a></li>
-        <li><a routerLink="/about">About</a></li>
+
+  <nav class="navbar bg-gray-800 text-white">
+    <div class="inner-container flex justify-between items-center p-4">
+      <a (click)="navigateToHome()" class="logo text-2xl font-bold hover:text-gray-300 cursor-pointer">MyApp</a>
+      <ul class="nav-links flex space-x-6">
+        <li>
+          <a (click)="navigateToHome()" class="hover:text-gray-300 transition">Home</a>
+        </li>
+        <li>
+          <a (click)="navigateToLogin()" class="hover:text-gray-300 transition">Login</a>
+        </li>
+        <li>
+          <a (click)="navigateToRegister()" class="hover:text-gray-300 transition">Register</a>
+        </li>
+        <li>
+          <a (click)="navigateToAbout()" class="hover:text-gray-300 transition">About</a>
+        </li>
       </ul>
     </div>
   </nav>
-  
