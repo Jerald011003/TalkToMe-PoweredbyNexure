@@ -1,34 +1,53 @@
 <div class="home-container">
-  <header class="header bg-green-500 text-white p-4">
+  
+  <header class="header bg-gray-200 text-gray-800 p-6">
     <div>
       <h1 class="text-3xl font-bold">Welcome to the Home Page!</h1>
       <p *ngIf="email" class="mt-2">Logged in as: {{ email }}</p>
-    </div>      
+    </div>
   </header>
 
-  <main class="main-content p-6">
-    <section class="hero bg-gray-200 p-10 my-6 rounded-lg shadow-md">
+  <main class="main-content p-10">
+    <section class="hero bg-gray-300 p-10 my-6 rounded-lg shadow-md">
       <h2 class="text-2xl font-semibold">Your Journey Starts Here</h2>
       <p class="mt-2 text-lg">Explore our features and take control of your life with our application.</p>
-      <button routerLink="/login" class="btn bg-green-600 text-white py-2 px-4 rounded mt-4 hover:bg-green-700 transition">Get Started</button>
+      <button routerLink="/login" class="bg-green-600 text-white py-2 px-4 rounded mt-4 hover:bg-green-700 transition">Get Started</button>
     </section>
 
     <section class="features mt-6">
-      <h3 class="text-xl font-bold mb-4">Features</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="feature border border-gray-300 rounded-lg p-4 shadow hover:shadow-lg transition">
-          <h4 class="font-semibold text-lg">Feature One</h4>
-          <p>Description of feature one.</p>
+      <h3 class="text-2xl font-bold mb-6 text-center">Features</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="feature border border-gray-300 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
+          <h4 class="font-semibold text-xl mb-2">Feature One</h4>
+          <p class="text-gray-600">Description of feature one.</p>
         </div>
-        <div class="feature border border-gray-300 rounded-lg p-4 shadow hover:shadow-lg transition">
-          <h4 class="font-semibold text-lg">Feature Two</h4>
-          <p>Description of feature two.</p>
+        <div class="feature border border-gray-300 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
+          <h4 class="font-semibold text-xl mb-2">Feature Two</h4>
+          <p class="text-gray-600">Description of feature two.</p>
         </div>
-        <div class="feature border border-gray-300 rounded-lg p-4 shadow hover:shadow-lg transition">
-          <h4 class="font-semibold text-lg">Feature Three</h4>
-          <p>Description of feature three.</p>
+        <div class="feature border border-gray-300 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
+          <h4 class="font-semibold text-xl mb-2">Feature Three</h4>
+          <p class="text-gray-600">Description of feature three.</p>
         </div>
       </div>
     </section>
+
+    <!-- New About Section -->
+    <section class="about bg-gray-200 p-10 my-6 rounded-lg shadow-md">
+      <h3 class="text-2xl font-bold mb-4 text-center">About Us</h3>
+      <p class="text-gray-700 text-lg text-center">
+        We are committed to providing the best services to help you achieve your goals. Our platform offers a range of features designed to make your life easier and more productive.
+      </p>
+    </section>
+
+    <!-- New Contact Section -->
+    <section class="contact bg-gray-300 p-10 my-6 rounded-lg shadow-md">
+      <h3 class="text-2xl font-bold mb-4 text-center">Contact Us</h3>
+      <p class="text-gray-700 text-lg text-center">
+        Have questions? Reach out to us at <a href="mailto:info@yourcompany.com" class="text-green-600 hover:underline">infoyourcompany.com</a> or visit our support page.
+      </p>
+    </section>
+    
   </main>
+  <app-footer></app-footer>
 </div>
