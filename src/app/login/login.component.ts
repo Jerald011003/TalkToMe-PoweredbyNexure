@@ -21,7 +21,7 @@ export class LoginComponent {
     if (this.email === 'jerald@gmail.com' && this.password === '123') {
       this.router.navigate(['/'], { queryParams: { email: this.email } });
     } else {
-      this.errorMessage = 'Invalid email or password. Please try again.';
+     console.log(this.errorMessage = 'Invalid email or password. Please try again.') ;
     }
   }
 }

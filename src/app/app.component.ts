@@ -7,6 +7,9 @@ import { LoginComponent } from './login/login.component';
 import { AppNavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,10 +24,12 @@ export class AppComponent {
 @NgModule({
   declarations: [
     LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule 
+    FormsModule,
+    RouterModule
   ],
   exports: [
   ],
