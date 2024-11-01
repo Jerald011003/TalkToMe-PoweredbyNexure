@@ -1,27 +1,53 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SupabaseService } from '../services/supabase.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss'],
 })
-
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
-  errorMessage: string = ''; 
+  loginForm: FormGroup;
+  isLoading: boolean = false;
 
-  constructor(private router: Router) {}
-
-  onSubmit() {
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
-
-    if (this.email === 'jerald@gmail.com' && this.password === '123') {
-      this.router.navigate(['/'], { queryParams: { email: this.email } });
-    } else {
-     console.log(this.errorMessage = 'Invalid email or password. Please try again.') ;
-    }
+  constructor(
+    private fb: FormBuilder,
+    private supabaseService: SupabaseService,
+    private router: Router
+  ) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
   }
+
+  async onSubmit() {
+    if (this.isLoading) return; 
+    this.isLoading = true;
+  
+    const { email, password } = this.loginForm.value;
+  
+    this.supabaseService.signIn(email, password)
+      .then(({ data, error }) => {
+        if (error) {
+          throw new Error(error.message);
+        }
+  
+        const user = data.user; 
+        if (user) {
+          this.router.navigate(['/']); 
+        }
+      })
+      .catch(error => {
+        console.error('Login error:', error); 
+        alert('Login failed: ' + error);
+      })
+      .finally(() => {
+        this.isLoading = false; 
+      });
+  }
+  
+  
 }
