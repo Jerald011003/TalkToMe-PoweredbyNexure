@@ -4,6 +4,7 @@ import { SupabaseService } from '../services/supabase.service';
 import { Router } from '@angular/router';
 
 @Component({
+
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
   isLoading: boolean = false;
-
+  
   constructor(
     private fb: FormBuilder,
     private supabaseService: SupabaseService,
@@ -23,44 +24,57 @@ export class LoginComponent {
     });
   }
 
-  async onSubmit() {
-    if (this.isLoading) return; 
-    this.isLoading = true;
+  onSubmit() {
+    if (this.isLoading || this.loginForm.invalid) return; // Exit if loading or form is invalid
   
-    console.time('Total Login Time'); // Tracks the entire process time
-    console.time('Form Validation');   // Tracks time before submitting
-    
-    const { email, password } = this.loginForm.value;
+    this.isLoading = true; // Indicate loading state
+    const { email, password } = this.loginForm.value; // Get form values
   
-    console.timeEnd('Form Validation'); // End form validation time
-  
-    console.time('Supabase Sign-In Request'); // Start Supabase call timer
+    // Call the Supabase sign-in method using .then()
     this.supabaseService.signIn(email, password)
       .then(({ data, error }) => {
-        console.timeEnd('Supabase Sign-In Request'); // End Supabase call timer
-        console.timeEnd('Total Login Time');         // End total process time
-        
+        this.isLoading = false; // Reset loading state
+  
         if (error) {
           console.error('Supabase Error:', error);
-          alert('Login failed: ' + error.message);
-          throw new Error(error.message);
+          alert('Login failed: ' + error.message); // Show error message
+          return; // Exit early if there's an error
         }
   
         const user = data.user;
         if (user) {
           console.log('User authenticated successfully.');
-          this.router.navigate(['/']); 
+          this.router.navigate(['/']); // Navigate to home on success
         }
       })
       .catch(error => {
-        console.error('Login error:', error); 
-      })
-      .finally(() => {
-        this.isLoading = false;
+        this.isLoading = false; // Ensure loading state is reset on error
+        console.error('Login error:', error); // Log unexpected errors
+        alert('An unexpected error occurred. Please try again later.'); // Show a generic error message
       });
   }
   
   
   
   
+  // !!!NO SUPABASE
+  // loginForm!: FormGroup;
+
+  // constructor(private fb: FormBuilder) {}
+
+  // ngOnInit(): void {
+  //   this.loginForm = this.fb.group({
+  //     email: ['', [Validators.required, Validators.email]],
+  //     password: ['', [Validators.required]],
+  //   });
+  // }
+
+  // onSubmit(): void {
+  //   if (this.loginForm.valid) {
+  //     const formValues = this.loginForm.value;
+  //     console.log('Form Submitted:', formValues);
+  //     // You can add logic here to simulate a successful login
+  //     alert('Login successful!'); // Just for testing
+  //   }
+  // }
 }
