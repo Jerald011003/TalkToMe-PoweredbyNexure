@@ -32,6 +32,7 @@ export class AppComponent {
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
+    
   ],
   exports: [
   ],

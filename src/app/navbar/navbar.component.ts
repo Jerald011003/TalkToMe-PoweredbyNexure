@@ -12,18 +12,26 @@ export class AppNavbarComponent {
   constructor(private router: Router) {}
 
   navigateToHome() {
-    this.router.navigate(['/']);  
+    this.router.navigate(['/dashboard']);  
   }
 
-  navigateToLogin() {
-    this.router.navigate(['/login']); 
-  }
+  // navigateToLogin() {
+  //   this.router.navigate(['/']); 
+  // }
 
-  navigateToRegister() {
-    this.router.navigate(['/register']);
-  }
+  // navigateToRegister() {
+  //   this.router.navigate(['/register']);
+  // }
 
   navigateToAbout() {
     this.router.navigate(['/about']);
   }
+
+  logout() {  
+    this.router.navigate(['/']).then(() => {
+      window.location.reload();
+    });
+  }
+  
+  
 }
