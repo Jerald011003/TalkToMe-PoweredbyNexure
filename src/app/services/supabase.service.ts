@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../env/environments/environment';
 import { BehaviorSubject } from 'rxjs';
-
 @Injectable({
   providedIn: 'root',
 })
 export class SupabaseService {
   private supabase: SupabaseClient;
   private authStatus = new BehaviorSubject<boolean>(false);
-  private supabaseUrl = 'https://vduerriglvtnzgqvxrxy.supabase.co';
-  private supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZkdWVycmlnbHZ0bnpncXZ4cnh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk5MjgxOTIsImV4cCI6MjA0NTUwNDE5Mn0.QeZlQKgtt4RnoMsrxntkopL_FPIavWvai7zFxuCg-Xc';
+  private supabaseUrl = environment.supabaseUrl;
+  private supabaseKey = environment.supabaseKey;
 
   constructor() {
     if (environment.supabaseUrl && environment.supabaseKey) {

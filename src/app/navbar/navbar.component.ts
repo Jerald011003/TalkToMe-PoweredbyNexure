@@ -15,14 +15,6 @@ export class AppNavbarComponent {
     this.router.navigate(['/dashboard']);  
   }
 
-  // navigateToLogin() {
-  //   this.router.navigate(['/']); 
-  // }
-
-  // navigateToRegister() {
-  //   this.router.navigate(['/register']);
-  // }
-
   navigateToAbout() {
     this.router.navigate(['/about']);
   }

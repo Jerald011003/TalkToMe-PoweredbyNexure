@@ -8,38 +8,35 @@ describe('AuthGuard', () => {
   let router: Router;
 
   beforeEach(() => {
-    // Create a mock Router instance
     const mockRouter = {
-      navigate: jasmine.createSpy('navigate') // Spy on the navigate method
+      navigate: jasmine.createSpy('navigate')
     };
 
     TestBed.configureTestingModule({
       providers: [
         AuthGuard,
-        { provide: Router, useValue: mockRouter } // Provide the mock Router
+        { provide: Router, useValue: mockRouter }
       ]
     });
 
-    guard = TestBed.inject(AuthGuard); // Get the AuthGuard instance
-    router = TestBed.inject(Router); // Get the Router instance
+    guard = TestBed.inject(AuthGuard);
+    router = TestBed.inject(Router);
   });
 
   it('should be created', () => {
-    expect(guard).toBeTruthy(); // Test if guard is created
+    expect(guard).toBeTruthy();
   });
 
   it('should allow the route when token exists', () => {
-    spyOn(localStorage, 'getItem').and.returnValue('dummy_token'); // Mock localStorage.getItem
-
+    spyOn(localStorage, 'getItem').and.returnValue('dummy_token');
     const result = guard.canActivate();
-    expect(result).toBeTrue(); // Expect guard to return true
+    expect(result).toBeTrue();
   });
 
   it('should redirect to login when token does not exist', () => {
-    spyOn(localStorage, 'getItem').and.returnValue(null); // Mock localStorage.getItem to return null
-
+    spyOn(localStorage, 'getItem').and.returnValue(null);
     const result = guard.canActivate();
-    expect(result).toBeFalse(); // Expect guard to return false
-    expect(router.navigate).toHaveBeenCalledWith(['/']); // Expect router.navigate to be called
+    expect(result).toBeFalse();
+    expect(router.navigate).toHaveBeenCalledWith(['/']);
   });
 });

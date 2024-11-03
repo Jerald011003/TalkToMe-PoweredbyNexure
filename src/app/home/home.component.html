@@ -1,36 +1,49 @@
 <app-navbar></app-navbar>
 
-<div class="home-container min-h-screen flex flex-col bg-white-900 text-gray-100">
+<div class="home-container min-h-screen flex flex-col bg-white text-gray-100">
   <header class="header w-full text-gray-200 p-6 text-center flex justify-between items-center">
   </header>
 
   <main class="main-content flex-1 flex flex-col items-center justify-center p-6">
-    <section class="response-container w-full max-w-2xl text-black text-white rounded-lg shadow-lg p-6 overflow-y-auto flex-1 mb-4">
-      <h2 class="text-2x1 font-semibold text-black text-center mb-4">
-        Talk to me! 
-        <span class="text-lg text-black font-light">{{email}}</span>
-      </h2>
-      <div class="responses flex flex-col space-y-4">
-        <ng-container *ngFor="let response of responses">
-          <div class="response-message p-4 bg-gray-800 rounded-lg text-left">
-            <h3 class="text-xl font-semibold">{{email}}</h3>
-            <p class="text-lg text-gray-300">{{response.description}}</p>
-          </div>
-        </ng-container>
-      </div>
-    </section>
+
+    <div class="w-full max-w-2xl h-[600px] overflow-y-auto bg-white rounded-lg shadow-lg mb-4">
+      <section class="response-container w-full text-black p-6">
+        <h2 class="text-1xl font-semibold text-black text-center mb-4">
+          Talk to me! 
+          <span class="text-lg text-black font-light">{{email}}</span>
+        </h2>
+
+        <div class="responses flex flex-col space-y-4">
+          <ng-container *ngFor="let item of chatHistory">
+            <div class="response-message p-4 text-white bg-gray-800 rounded-lg text-left">
+              <i class="fa mr-2" [ngClass]="{'fa-user-circle': item.from === 'user', 'fa-graduation-cap': item.from === 'bot'}"> </i>
+              <span class="responses" [innerHTML]="formatText(item.message)"></span>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="loading">
+            <app-skeleton></app-skeleton>
+          </ng-container>
+        </div>
+      </section>
+    </div>
     
-    <div class="input-container w-full max-w-2xl bg-black-600 p-4 rounded-lg shadow-lg">
+    <div class="input-container w-full max-w-2xl  p-4 rounded-lg shadow-lg">
       <div class="flex">
         <input 
           type="text" 
-          [(ngModel)]="userInput" 
           placeholder="Type your message..." 
-          class="w-full p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-black"
+          (keyup.enter)="sendData()"
+          class="w-full p-2 rounded-lg border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-black"
+          [(ngModel)]="prompt"
           />
-        <button (click)="sendMessage()" class="bg-black text-white p-2 rounded-lg ml-2 hover:bg-gray-800 transition">
+          <button (click)="sendData()" [disabled]="loading" 
+          class="p-2 rounded-lg ml-2 transition 
+            bg-black text-white 
+            hover:bg-gray-800 
+            disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed">
           Talk
         </button>
+        
       </div>
     </div>
   </main>

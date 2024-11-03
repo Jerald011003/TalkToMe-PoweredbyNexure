@@ -1,0 +1,52 @@
+/* Base styles */
+.user-card {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 200px;
+}
+
+/* Skeleton effect */
+.skeleton {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Define different skeleton sizes */
+.name1,
+.name2,
+.name3,
+.name4 {
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+/* Width variations for each line */
+.name1 { width: 80%; }
+.name2 { width: 70%; }
+.name3 { width: 50%; }
+.name4 { width: 90%; }
+
+/* Loading shimmer animation */
+.skeleton::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    animation: shimmer 1.5s infinite;
+}
+
+/* Keyframes for shimmer animation */
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}

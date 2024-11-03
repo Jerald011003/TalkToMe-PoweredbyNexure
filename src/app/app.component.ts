@@ -7,14 +7,14 @@ import { LoginComponent } from './login/login.component';
 import { AppNavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SkeletonComponent } from './skeleton/skeleton.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AppNavbarComponent, FooterComponent, HomeComponent],
+  imports: [RouterOutlet, SkeletonComponent, AppNavbarComponent, FooterComponent, HomeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -25,7 +25,6 @@ export class AppComponent {
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
   ],
   imports: [
     BrowserModule,

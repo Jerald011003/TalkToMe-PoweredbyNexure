@@ -1,31 +1,30 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from '../footer/footer.component';
 import { AppNavbarComponent } from '../navbar/navbar.component';
 import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
-
+import { SkeletonComponent } from '../skeleton/skeleton.component';
+import { GeminiService } from '../gemini.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, FooterComponent, AppNavbarComponent],
+  imports: [CommonModule, SkeletonComponent, FormsModule, FooterComponent, AppNavbarComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
   email: string | null = null; 
   userInput: string = '';
   responses: { title: string; description: string }[] = [];
-
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.checkGoogleToken();
     }
   }
-  // wal alang
   private checkGoogleToken(): void {
     const token = localStorage.getItem('googleToken'); 
     if (token) {
@@ -47,24 +46,57 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  sendMessage(): void {
-    if (this.userInput.trim()) {
-      const newResponse = {
-        title: 'User',
-        description: this.userInput,
-      };
+  // sendMessage(): void {
+  //   if (this.userInput.trim()) {
+  //     const newResponse = {
+  //       title: 'User',
+  //       description: this.userInput,
+  //     };
 
-      this.responses.push(newResponse);
-      this.userInput = '';
+  //     this.responses.push(newResponse);
+  //     this.userInput = '';
 
-      setTimeout(() => {
-        const aiResponse = {
-          title: 'AI',
-          description: `You said: ${newResponse.description}`,
-        };
-        this.responses.push(aiResponse);
-      }, 1000);
+  //     setTimeout(() => {
+  //       const aiResponse = {
+  //         title: 'AI',
+  //         description: `You said: ${newResponse.description}`,
+  //       };
+  //       this.responses.push(aiResponse);
+  //     }, 1000);
       
+  //   }
+  // }
+
+  // !!!AI GEMINI
+  prompt: string = '';
+
+  geminiService: GeminiService = inject(GeminiService)
+
+  loading: boolean = false;
+
+  chatHistory: any[] = [];
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.geminiService.getMessageHistory().subscribe((res) => {
+      if(res) {
+        this.chatHistory.push(res);
+      }    
+    })
+  }
+
+  async sendData() {
+    if(this.prompt && !this.loading){
+      this.loading = true;
+      const data = this.prompt;
+      this.prompt = '';
+      await this.geminiService.generateText(data);
+      this.loading = false;
+      this.prompt = '';
     }
+  }
+
+  formatText(text: string){
+    const result = text.replaceAll('*', '');
+    return result;
   }
 }
