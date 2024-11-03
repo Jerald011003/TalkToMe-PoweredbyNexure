@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { SupabaseService } from '../services/supabase.service';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 

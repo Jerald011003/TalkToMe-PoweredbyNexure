@@ -28,6 +28,7 @@ export class AppNavbarComponent {
   }
 
   logout() {  
+    localStorage.removeItem('googleToken');
     this.router.navigate(['/']).then(() => {
       window.location.reload();
     });
