@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit {
       this.prompt = '';
     }
   }
-
+  // great
   formatText(text: string){
     const result = text.replaceAll('*', '');
     return result;
