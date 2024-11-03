@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
       this.checkGoogleToken();
     }
   }
-
+  // wal alang
   private checkGoogleToken(): void {
     const token = localStorage.getItem('googleToken'); 
     if (token) {
