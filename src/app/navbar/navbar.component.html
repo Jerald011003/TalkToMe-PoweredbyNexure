@@ -1,22 +1,14 @@
-<nav class="navbar bg-white-800 text-gray">
-  <div class="inner-container flex justify-between items-center p-4">
-    <a (click)="navigateToHome()" class="logo text-2xl font-bold hover:text-gray-300 cursor-pointer">    <img src="TTA_logo.png" alt="Logo" class="w-15 h-12">
+<nav class="navbar text-black font-light">
+  <div class="inner-container flex flex-col items-center ">
+    <a (click)="navigateToHome()">
+      <img src="TTA_logo.png" alt="Logo" class="w-16 h-16">
     </a>
-    <ul class="nav-links flex space-x-6">
-      <!-- <li>
-        <a (click)="navigateToHome()" class="hover:text-gray-300 transition cursor-pointer">Dashboard</a>
-      </li> -->
-      <!-- <li>
-        <a (click)="navigateToLogin()" class="hover:text-gray-300 transition cursor-pointer">Login</a>
-      </li> -->
-      <!-- <li>
-        <a (click)="navigateToRegister()" class="hover:text-gray-300 transition cursor-pointer">Register</a>
-      </li> -->
+    <ul class="nav-links flex space-x-6 mt-4">
       <li>
-        <a (click)="navigateToAbout()" class="hover:text-gray-300 transition cursor-pointer">About</a>
+        <a (click)="navigateToAbout()" class="hover:text-yellow-500 transition transform hover:scale-110 cursor-pointer">About</a>
       </li>
       <li>
-        <a (click)="logout()" class="hover:text-gray-300 transition cursor-pointer">Logout</a>
+        <a (click)="logout()" class="hover:text-yellow-500 transition transform hover:scale-110 cursor-pointer">Logout</a>
       </li>
     </ul>
   </div>

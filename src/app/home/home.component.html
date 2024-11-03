@@ -5,10 +5,10 @@
   </header>
 
   <main class="main-content flex-1 flex flex-col items-center justify-center p-6">
-    <section class="response-container w-full max-w-2xl bg-black text-white rounded-lg shadow-lg p-6 overflow-y-auto flex-1 mb-4">
-      <h2 class="text-2x1 font-semibold text-center mb-4">
-        Hello! 
-        <span class="text-lg font-light">{{email}}</span>
+    <section class="response-container w-full max-w-2xl text-black text-white rounded-lg shadow-lg p-6 overflow-y-auto flex-1 mb-4">
+      <h2 class="text-2x1 font-semibold text-black text-center mb-4">
+        Talk to me! 
+        <span class="text-lg text-black font-light">{{email}}</span>
       </h2>
       <div class="responses flex flex-col space-y-4">
         <ng-container *ngFor="let response of responses">
@@ -29,7 +29,7 @@
           class="w-full p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-black"
           />
         <button (click)="sendMessage()" class="bg-black text-white p-2 rounded-lg ml-2 hover:bg-gray-800 transition">
-          Send
+          Talk
         </button>
       </div>
     </div>
