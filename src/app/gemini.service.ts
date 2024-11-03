@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { apiKey } from '../../env/environments/environment';
+import { apiKey } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'

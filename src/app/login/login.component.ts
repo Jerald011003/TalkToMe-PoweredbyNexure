@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { google_client } from '../../../env/environments/environment';
+import { google_client } from '../../environments/environment';
 
 declare global {
   interface Window {
