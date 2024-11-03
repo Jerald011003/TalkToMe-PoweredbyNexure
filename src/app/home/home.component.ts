@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
       const decoded: any = jwtDecode(token);
       this.email = decoded.email || null; 
       console.log('Decoded Email:', this.email);
+      
     } catch (error) {
       console.error('Error decoding token:', error);
     }
@@ -63,6 +64,7 @@ export class HomeComponent implements OnInit {
         };
         this.responses.push(aiResponse);
       }, 1000);
+      
     }
   }
 }
