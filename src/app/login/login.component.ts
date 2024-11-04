@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   isLoading: boolean = false;
 
   google_client = environment.googleClient;
+  login_url: string = '/dashboard'; // Define your login URL here
 
   constructor(
     private fb: FormBuilder,
@@ -22,9 +23,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Check if the platform is browser
     if (isPlatformBrowser(this.platformId)) {
-      // Define the Google login success callback globally
       window.onGoogleLoginSuccess = this.onGoogleLoginSuccess.bind(this);
     }
 
@@ -34,14 +33,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // This function will be called on successful Google login
   onGoogleLoginSuccess(response: any): void {
-    const token = response.credential;
+    const token = response.credential; 
     localStorage.setItem('googleToken', token);
-    this.router.navigate(['/dashboard']);
+    // Navigate to the dashboard after successful login
+    this.router.navigate([this.login_url]); // Use the login_url variable here
   }
 
-  // Form submission logic
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.isLoading = true;
