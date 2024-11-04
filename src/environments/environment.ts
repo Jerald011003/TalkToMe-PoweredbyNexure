@@ -1,6 +1,6 @@
 // environment.prod.ts
 export const environment = {
-  production: true,
+  production: false,
   supabaseUrl: process.env['SUPABASE_URL'],
   supabaseKey: process.env['SUPABASE_KEY'],
   geminiKey: process.env['GEMINI_KEY'],
