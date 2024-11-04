@@ -1,6 +1,6 @@
 
 export const environment = {
-  production: false,
+  production: true,
   supabaseUrl: process.env['SUPABASE_URL'],
   supabaseKey: process.env['SUPABASE_KEY'],
   geminiKey: process.env['GEMINI_KEY'],
