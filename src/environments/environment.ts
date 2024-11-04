@@ -7,7 +7,7 @@ export interface Environment {
 }
 
 export const environment: Environment = {
-  production: false, // or true for production
+  production: false, 
   supabaseUrl: '',
   supabaseKey: '',
   geminiKey: '',

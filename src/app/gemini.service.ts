@@ -13,7 +13,7 @@ console.log('Google Client:', environment.googleClient);
   providedIn: 'root'
 })
 export class GeminiService {
-
+  
   private generativeAI: GoogleGenerativeAI;
 
   private messageHistory: BehaviorSubject<any> = new BehaviorSubject(null);
