@@ -5,7 +5,6 @@
     "ng": "ng",
     "start": "concurrently \"npm run server\" \"npm run frontend\"",
     "server": "node server.js",
-    "vercel-build": "npm run build",
     "frontend": "ng serve",
     "prebuild": "node set-env.js",
     "build": "ng build",
