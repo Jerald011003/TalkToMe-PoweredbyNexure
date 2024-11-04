@@ -3,16 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../environments/environment';
-console.log('Supabase URL:', environment.supabaseUrl);
-console.log('Supabase Key:', environment.supabaseKey);
-console.log('Gemini Key:', environment.geminiKey);
-console.log('Google Client:', environment.googleClient);
-
-declare global {
-  interface Window {
-    onGoogleLoginSuccess: (response: any) => void;
-  }
-}
 
 @Component({
   selector: 'app-login',
@@ -22,8 +12,8 @@ declare global {
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   isLoading: boolean = false;
-  
-  google_client = environment.googleClient
+
+  google_client = environment.googleClient;
 
   constructor(
     private fb: FormBuilder,
@@ -32,25 +22,30 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Check if the platform is browser
     if (isPlatformBrowser(this.platformId)) {
+      // Define the Google login success callback globally
       window.onGoogleLoginSuccess = this.onGoogleLoginSuccess.bind(this);
     }
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
+  // This function will be called on successful Google login
   onGoogleLoginSuccess(response: any): void {
-    const token = response.credential; 
-    localStorage.setItem('googleToken', token); 
+    const token = response.credential;
+    localStorage.setItem('googleToken', token);
     this.router.navigate(['/dashboard']);
   }
 
+  // Form submission logic
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.isLoading = true;
+      // Add your form submission logic here
     }
   }
 }
