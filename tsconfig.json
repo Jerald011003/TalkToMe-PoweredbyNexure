@@ -29,6 +29,5 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  },
-  "include": ["src/**/*.ts", "src/globals.d.ts"], // Include your type declaration file here
+  }
 }

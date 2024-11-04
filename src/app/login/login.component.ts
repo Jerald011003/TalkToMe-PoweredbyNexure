@@ -4,6 +4,12 @@ import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../environments/environment';
 
+declare global {
+  interface Window {
+    onGoogleLoginSuccess: (response: any) => void;
+  }
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,9 +18,8 @@ import { environment } from '../../environments/environment';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   isLoading: boolean = false;
-
-  google_client = environment.googleClient;
-  login_url: string = '/dashboard'; // Define your login URL here
+  
+  google_client = environment.googleClient
 
   constructor(
     private fb: FormBuilder,
@@ -29,21 +34,19 @@ export class LoginComponent implements OnInit {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
   onGoogleLoginSuccess(response: any): void {
     const token = response.credential; 
-    localStorage.setItem('googleToken', token);
-    // Navigate to the dashboard after successful login
-    this.router.navigate([this.login_url]); // Use the login_url variable here
+    localStorage.setItem('googleToken', token); 
+    this.router.navigate(['/dashboard']);
   }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      // Add your form submission logic here
     }
   }
 }
