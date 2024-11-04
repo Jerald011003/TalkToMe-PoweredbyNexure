@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../environments/environment';
+
 console.log('Supabase URL:', environment.supabaseUrl);
 console.log('Supabase Key:', environment.supabaseKey);
 console.log('Gemini Key:', environment.geminiKey);
