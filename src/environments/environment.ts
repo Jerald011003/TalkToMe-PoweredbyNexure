@@ -1,8 +1,8 @@
 // environment.prod.ts
 export const environment = {
   production: true,
-  supabaseUrl: 'VITE_SUPABASE_URL',
-  supabaseKey: 'VITE_SUPABASE_KEY',
-  geminiKey: 'VITE_GEMINI_KEY',
-  googleClient: 'VITE_GOOGLE_CLIENT'
+  supabaseUrl: 'VERCEL_SUPABASE_URL',
+  supabaseKey: 'VERCEL_SUPABASE_KEY',
+  geminiKey: 'VVERCEL_GEMINI_KEY',
+  googleClient: 'VERCEL_GOOGLE_CLIENT'
 };
