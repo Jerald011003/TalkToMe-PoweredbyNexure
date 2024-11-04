@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { google_client } from '../../environments/environment';
+import { environment } from '../../environments/environment';
 
 declare global {
   interface Window {
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   isLoading: boolean = false;
   
-  google_client = google_client.googleClient
+  google_client = environment.googleClient
 
   constructor(
     private fb: FormBuilder,
