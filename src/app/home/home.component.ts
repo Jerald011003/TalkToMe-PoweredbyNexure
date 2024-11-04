@@ -7,6 +7,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
 import { SkeletonComponent } from '../skeleton/skeleton.component';
 import { GeminiService } from '../gemini.service';
+
 @Component({
   selector: 'app-home',
   standalone: true,
