@@ -3,6 +3,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,7 @@ export class GeminiService {
   private messageHistory: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor() { 
-    this.generativeAI = new GoogleGenerativeAI (environment.geminiKey)
+    this.generativeAI = new GoogleGenerativeAI ('GEMINI_KEY')
    }
 
    async generateText(prompt: string) { 
