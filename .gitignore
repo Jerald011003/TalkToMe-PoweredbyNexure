@@ -14,7 +14,7 @@ backend-server/node_modules/
 
 env/
 
-public/.env.local
+public/.env
 
 # IDEs and editors
 .idea/
