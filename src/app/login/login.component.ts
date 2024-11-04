@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     const token = response.credential; 
     localStorage.setItem('googleToken', token); 
     this.router.navigate(['/dashboard']);
-    window.location.reload();
+    // window.location.reload();
   }
 
   onSubmit(): void {
