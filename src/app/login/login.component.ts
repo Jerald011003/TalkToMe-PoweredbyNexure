@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../environments/environment';
+console.log('Supabase URL:', environment.supabaseUrl);
+console.log('Supabase Key:', environment.supabaseKey);
+console.log('Gemini Key:', environment.geminiKey);
+console.log('Google Client:', environment.googleClient);
 
 declare global {
   interface Window {
