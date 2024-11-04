@@ -7,6 +7,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
 import { SkeletonComponent } from '../skeleton/skeleton.component';
 import { GeminiService } from '../gemini.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -77,7 +78,7 @@ export class HomeComponent implements OnInit {
 
   chatHistory: any[] = [];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
     this.geminiService.getMessageHistory().subscribe((res) => {
       if(res) {
         this.chatHistory.push(res);
@@ -95,9 +96,14 @@ export class HomeComponent implements OnInit {
 
     }
   }
-  // great
+
   formatText(text: string){
     const result = text.replaceAll('*', '');
     return result;
   }
+
+  navigateToHome() {
+    this.router.navigate(['/dashboard']);  
+  }
+
 }

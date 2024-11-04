@@ -1,54 +1,59 @@
-<app-navbar></app-navbar>
+<div class="flex h-screen bg-background">
+  <aside class="w-1/4 bg-card p-6 border-r border-border shadow-lg">
+    <h2 class="text-3xl font-bold text-primary mb-4">TalkToMe</h2>
 
-<div class="home-container min-h-screen flex flex-col bg-white text-gray-100">
-  <header class="header w-full text-gray-200 p-6 text-center flex justify-between items-center">
-  </header>
+    <ul class="mt-6 space-y-3">
+        <li class="text-muted-foreground hover:text-primary cursor-pointer transition duration-300 transform hover:scale-105">AI Code Detector</li>
+        <li class="text-muted-foreground hover:text-primary cursor-pointer transition duration-300 transform hover:scale-105">Explore GPTs</li>
+        <li class="text-muted-foreground hover:text-primary cursor-pointer transition duration-300 transform hover:scale-105">Yesterday</li>
+        <li class="text-muted-foreground hover:text-primary cursor-pointer transition duration-300 transform hover:scale-105">Last 7 Days</li>
+        <li class="text-muted-foreground hover:text-primary cursor-pointer transition duration-300 transform hover:scale-105">More Options</li>
+    </ul>
 
-  <main class="main-content flex-1 flex flex-col items-center justify-center p-6">
+    </aside>
 
-    <div class="w-full max-w-2xl h-[600px] overflow-y-auto bg-white rounded-lg shadow-lg mb-4">
-      <section class="response-container w-full text-black p-6">
-        <h2 class="text-1xl font-semibold text-black text-center mb-4">
-          Talk to me! 
-          <span class="text-lg text-black font-light">{{email}}</span>
-        </h2>
 
-        <div class="responses flex flex-col space-y-4">
-          <ng-container *ngFor="let item of chatHistory">
-            <div class="response-message p-4 text-white bg-gray-800 rounded-lg text-left">
-              <i class="fa mr-2" [ngClass]="{'fa-user-circle': item.from === 'user', 'fa-graduation-cap': item.from === 'bot'}"> </i>
-              <span class="responses" [innerHTML]="formatText(item.message)"></span>
-            </div>
-          </ng-container>
-          <ng-container *ngIf="loading">
-            <app-skeleton></app-skeleton>
-          </ng-container>
-        </div>
-      </section>
-    </div>
-    
-    <div class="input-container w-full max-w-2xl  p-4 rounded-lg shadow-lg">
-      <div class="flex">
-        <input 
-          type="text" 
-          placeholder="Type your message..." 
-          (keyup.enter)="sendData()"
-          class="w-full p-2 rounded-lg border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-black"
-          [(ngModel)]="prompt"
-          />
-          <button (click)="sendData()" [disabled]="loading" 
-          class="p-2 rounded-lg ml-2 transition 
-            bg-black text-white 
-            hover:bg-gray-800 
-            disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed">
+  <main class="flex-1 p-10 bg-card">
+    <app-navbar class="absolute top-4 right-4"></app-navbar>
+
+    <div class="flex flex-col items-center justify-center h-full">
+      <div class="w-full max-w-2xl overflow-y-auto rounded-lg mb-4">
+        <section class="response-container w-full text-black p-6">
+          <div class="responses flex flex-col space-y-4">
+            <h1 *ngIf="!chatHistory.length" class="text-5xl font-extrabold text-primary  text-black text-center ">
+              What can I help with?
+            </h1>
+
+            <ng-container *ngFor="let item of chatHistory">
+              <div class="response-message p-4 text-white bg-gray-800 rounded-lg text-left">
+                <i class="fa mr-2" [ngClass]="{'fa-user-circle': item.from === 'user', 'fa-graduation-cap': item.from === 'bot'}"></i>
+                <span class="responses" [innerHTML]="formatText(item.message)"></span>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="loading">
+              <app-skeleton></app-skeleton>
+            </ng-container>
+          </div>
+        </section>
+      </div>
+
+      <div class="flex items-center space-x-4 w-2/3 mt-4">
+        <input type="text" 
+               placeholder="Type your message..." 
+               (keyup.enter)="sendData()" 
+               class="p-4 border border-border rounded-lg shadow focus:outline-none focus:ring focus:ring-ring flex-grow transition duration-300 hover:border-primary text-black"
+               [(ngModel)]="prompt" />
+        <button (click)="sendData()" [disabled]="loading" 
+                class="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-6 py-3 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed">
           Talk
         </button>
-        
       </div>
     </div>
   </main>
-
-  <app-footer class="w-full text-yellow-500 p-4 text-center">
-    <p>&copy; 2024 Your Company. All rights reserved.</p>
-  </app-footer>
 </div>
+
+
+<!-- <app-footer class="w-full text-yellow-500 p-4 text-center">
+  <p>&copy; 2024 Your Company. All rights reserved.</p>
+</app-footer> -->
