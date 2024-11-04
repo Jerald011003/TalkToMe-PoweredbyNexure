@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit {
       this.prompt = '';
       await this.geminiService.generateText(data);
       this.loading = false;
-      this.prompt = '';
+      // this.prompt = '';
     }
   }
   // great
