@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
     if (isPlatformBrowser(this.platformId)) {
-      if (window.innerWidth < 1024) { 
+      if (window.innerWidth < 768) { 
         this.isSidebarVisible = false;
       } else {
         this.isSidebarVisible = true;
@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.checkGoogleToken();
-      if (window.innerWidth < 1024) { 
+      if (window.innerWidth < 768) { 
         this.isSidebarVisible = false; 
       } else {
         this.isSidebarVisible = true; 
