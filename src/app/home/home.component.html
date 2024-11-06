@@ -1,8 +1,8 @@
 <div class="flex h-screen bg-background">
 
   <aside #sidebar id="sidebar" 
-  class="w-1/4 max-w-xs bg-card p-6 border-r border-border shadow-lg relative"
-  *ngIf="isSidebarVisible">
+    class="w-1/4 max-w-xs bg-card p-6 border-r border-border shadow-lg relative sm:absolute sm:left-0 sm:top-0 sm:w-full sm:h-full sm:bg-white sm:shadow-lg sm:z-50"
+    *ngIf="isSidebarVisible">
     <button 
       class="absolute top-3 p-1 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition duration-300 transform hover:scale-105"
       (click)="toggleSidebar(false)">
@@ -16,7 +16,6 @@
     </button>
   
     <div class="mt-7">
-
       <h3 class="text-sm font-bold p-1 text-gray-700">Today</h3>
       <ul class="space-y-1">
         <li class="text-base p-1 text-muted-foreground rounded-xl hover:text-gray-700 hover:bg-gray-200 cursor-pointer transition duration-300 transform hover:scale-105">
@@ -45,28 +44,25 @@
       </ul>
     </div>
   </aside>
-  <!-- <app-navbar class="absolute top-4 right-4"></app-navbar> -->
 
   <main class="flex-1 p-10 bg-card">
-    
     <div class="flex flex-col items-center justify-center h-full">
       <div class="w-full max-w-2xl overflow-y-auto rounded-lg mb-4">
         <section class="response-container w-full text-black p-6">
           <div class="responses flex flex-col space-y-4">
-
             <button #openSidebarBtn 
-                class="fixed top-4 left-4 p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition duration-300 transform hover:scale-105" 
-                (click)="toggleSidebar(true)" 
-                *ngIf="!isSidebarVisible">
-                <i class="fas fa-bars text-xl"></i>
+              class="fixed top-4 left-4 p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition duration-300 transform hover:scale-105" 
+              (click)="toggleSidebar(true)" 
+              *ngIf="!isSidebarVisible">
+              <i class="fas fa-bars text-xl"></i>
             </button>
 
-            <h2 *ngIf="!chatHistory.length" class="text-3xl font-semibold text-primary  text-black text-center ">
+            <h2 *ngIf="!chatHistory.length" class="text-3xl font-semibold text-primary text-black text-center">
               What can I help with?
             </h2>
 
             <ng-container *ngFor="let item of chatHistory">
-              <div class=" response-message p-1 text-black text-left">
+              <div class="response-message p-1 text-black text-left">
                 <i class="fa mr-2 text-xl" [ngClass]="{'fa-user-circle': item.from === 'user', 'fa-robot': item.from === 'bot'}"></i>
                 <span class="responses" [innerHTML]="formatText(item.message)"></span>
               </div>
@@ -84,25 +80,22 @@
         <label for="file-upload" class="absolute left-3 top-1/2 transform -translate-y-1/2 cursor-pointer w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center text-white hover:bg-gray-800 transition duration-300 transform hover:scale-105">
           <i class="fas fa-upload text-base"></i>
         </label>
-      
+
         <input type="text" 
-               placeholder="Talk to me.." 
-               (keyup.enter)="sendData()" 
-               class="p-4 pl-14 pr-10 border h-[50px] border-border rounded-full shadow focus:outline-none focus:ring focus:ring-ring flex-grow transition duration-300 hover:border-primary text-black"
-               [(ngModel)]="prompt" />
+          placeholder="Talk to me.." 
+          (keyup.enter)="sendData()" 
+          class="p-4 pl-14 pr-10 border h-[50px] border-border rounded-full shadow focus:outline-none focus:ring focus:ring-ring flex-grow transition duration-300 hover:border-primary text-black"
+          [(ngModel)]="prompt" />
       
         <button (click)="sendData()" [disabled]="loading" 
-                class="absolute inset-y-2 right-2.5 w-8 h-8 rounded-full bg-gray-400 text-white flex items-center justify-center hover:bg-gray-800 transition duration-300 transform hover:scale-105 disabled:bg-gray-800 disabled:text-gray-200 disabled:cursor-not-allowed">
+          class="absolute inset-y-2 right-2.5 w-8 h-8 rounded-full bg-gray-400 text-white flex items-center justify-center hover:bg-gray-800 transition duration-300 transform hover:scale-105 disabled:bg-gray-800 disabled:text-gray-200 disabled:cursor-not-allowed">
           <i class="fas fa-paper-plane text-base"></i>
         </button>
       </div>
-      
+
       <div class="">
-      <app-footer class="text-yellow-500 p-4 text-center">
-      </app-footer>
-    </div>
-    
+        <app-footer class="text-yellow-500 p-4 text-center"></app-footer>
+      </div>
     </div>
   </main>
 </div>
-
