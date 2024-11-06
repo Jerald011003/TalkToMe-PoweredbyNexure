@@ -22,12 +22,12 @@ export class AppNavbarComponent {
     this.router.navigate(['/about']);
   }
 
-  logout() {  
-    localStorage.removeItem('googleToken');
-    this.router.navigate(['/']).then(() => {
-      window.location.reload();
-    });
-  }
+  // logout() {  
+  //   localStorage.removeItem('googleToken');
+  //   this.router.navigate(['/']).then(() => {
+  //     window.location.reload();
+  //   });
+  // }
   
   
 }

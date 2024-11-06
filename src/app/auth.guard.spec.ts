@@ -37,6 +37,6 @@ describe('AuthGuard', () => {
     spyOn(localStorage, 'getItem').and.returnValue(null);
     const result = guard.canActivate();
     expect(result).toBeFalse();
-    expect(router.navigate).toHaveBeenCalledWith(['/']);
+    expect(router.navigate).toHaveBeenCalledWith(['/login']);
   });
 });

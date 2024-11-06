@@ -1,22 +1,20 @@
 <nav class="navbar text-black font-light relative">
   <div class="flex flex-col items-center mr-5">
-    <!-- Circular button with logo -->
     <button (click)="isMenuOpen = !isMenuOpen"
             class="w-14 h-14 rounded-full border border-gray-300 flex items-center justify-center shadow-lg hover:shadow-md transition">
       <img src="TTA_logo.png" alt="Logo" class="w-10 h-10 rounded-full">
     </button>
 
-    <!-- Links dropdown, only visible when isMenuOpen is true -->
     <ul *ngIf="isMenuOpen" 
         class="nav-links mt-2 flex flex-col items-center space-y-2 bg-white p-4 rounded-lg shadow-md absolute top-20 z-10 w-37">
       <li>
         <a (click)="navigateToAbout(); isMenuOpen = false" 
            class="hover:text-yellow-500 transition transform hover:scale-105 cursor-pointer">About</a>
       </li>
-      <li>
+      <!-- <li>
         <a (click)="logout(); isMenuOpen = false" 
            class="hover:text-yellow-500 transition transform hover:scale-105 cursor-pointer">Logout</a>
-      </li>
+      </li> -->
     </ul>
   </div>
 </nav>

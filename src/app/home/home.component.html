@@ -1,36 +1,75 @@
 <div class="flex h-screen bg-background">
-  <aside class="w-1/4 bg-card p-6 border-r border-border shadow-lg">
-    <h2 class="text-3xl font-bold text-primary mb-4">TalkToMe</h2>
 
-    <ul class="mt-6 space-y-3">
-        <li class="text-muted-foreground hover:text-primary cursor-pointer transition duration-300 transform hover:scale-105">AI Code Detector</li>
-        <li class="text-muted-foreground hover:text-primary cursor-pointer transition duration-300 transform hover:scale-105">Explore GPTs</li>
-        <li class="text-muted-foreground hover:text-primary cursor-pointer transition duration-300 transform hover:scale-105">Yesterday</li>
-        <li class="text-muted-foreground hover:text-primary cursor-pointer transition duration-300 transform hover:scale-105">Last 7 Days</li>
-        <li class="text-muted-foreground hover:text-primary cursor-pointer transition duration-300 transform hover:scale-105">More Options</li>
-    </ul>
+  <aside #sidebar class="w-1/4 max-w-xs bg-card p-6 border-r border-border shadow-lg relative">
+    <button 
+      class="absolute top-3 p-1 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition duration-300 transform hover:scale-105"
+      (click)="toggleSidebar(false)">
+      <i class="fas fa-bars text-xl"></i>
+    </button>
+  
+    <button 
+      class="absolute top-3 right-6 p-1 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition duration-300 transform hover:scale-105"
+      (click)="toggleSidebar(false)">
+      <i class="fas fa-pencil-alt text-xl"></i>
+    </button>
+  
+    <div class="mt-7">
 
-    </aside>
-
+      <h3 class="text-sm font-bold p-1 text-gray-700">Today</h3>
+      <ul class="space-y-1">
+        <li class="text-base p-1 text-muted-foreground rounded-xl hover:text-gray-700 hover:bg-gray-200 cursor-pointer transition duration-300 transform hover:scale-105">
+          AI Code Detector
+        </li>
+        <li class="text-base p-1 text-muted-foreground rounded-lg hover:text-gray-700 hover:bg-gray-200 cursor-pointer transition duration-300 transform hover:scale-105">
+          Explore GPTs
+        </li>
+      </ul>
+  
+      <h3 class="text-sm font-bold p-1 text-gray-700 mt-5">Yesterday</h3>
+      <ul class="space-y-1">
+        <li class="text-base p-1 text-muted-foreground rounded-lg hover:text-gray-700 hover:bg-gray-200 cursor-pointer transition duration-300 transform hover:scale-105">
+          Yesterday
+        </li>
+      </ul>
+  
+      <h3 class="text-sm font-bold p-1 text-gray-700 mt-5">Last 7 Days</h3>
+      <ul class="space-y-1">
+        <li class="text-base p-1 text-muted-foreground rounded-lg hover:text-gray-700 hover:bg-gray-200 cursor-pointer transition duration-300 transform hover:scale-105">
+          Last 7 Days
+        </li>
+        <li class="text-base p-1 text-muted-foreground rounded-lg hover:text-gray-700 hover:bg-gray-200 cursor-pointer transition duration-300 transform hover:scale-105">
+          More Options
+        </li>
+      </ul>
+    </div>
+  </aside>
 
   <main class="flex-1 p-10 bg-card">
     <app-navbar class="absolute top-4 right-4"></app-navbar>
-
+    
     <div class="flex flex-col items-center justify-center h-full">
       <div class="w-full max-w-2xl overflow-y-auto rounded-lg mb-4">
         <section class="response-container w-full text-black p-6">
           <div class="responses flex flex-col space-y-4">
-            <h1 *ngIf="!chatHistory.length" class="text-5xl font-extrabold text-primary  text-black text-center ">
+
+            <button #openSidebarBtn 
+                class="fixed top-4 left-4 p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition duration-300 transform hover:scale-105" 
+                (click)="toggleSidebar(true)" 
+                style="display: none;">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+
+            <h2 *ngIf="!chatHistory.length" class="text-3xl font-semibold text-primary  text-black text-center ">
               What can I help with?
-            </h1>
+            </h2>
 
             <ng-container *ngFor="let item of chatHistory">
-              <div class="response-message p-4 text-white bg-gray-800 rounded-lg text-left">
-                <i class="fa mr-2" [ngClass]="{'fa-user-circle': item.from === 'user', 'fa-graduation-cap': item.from === 'bot'}"></i>
+              <div class=" response-message p-1 text-black text-left">
+                <i class="fa mr-2 text-xl" [ngClass]="{'fa-user-circle': item.from === 'user', 'fa-robot': item.from === 'bot'}"></i>
                 <span class="responses" [innerHTML]="formatText(item.message)"></span>
               </div>
             </ng-container>
-<!-- asd -->
+
             <ng-container *ngIf="loading">
               <app-skeleton></app-skeleton>
             </ng-container>
@@ -38,22 +77,30 @@
         </section>
       </div>
 
-      <div class="flex items-center space-x-4 w-2/3 mt-4">
+      <div class="flex items-center space-x-4 w-full max-w-2xl relative">
+        <input type="file" id="file-upload" class="hidden" />
+        <label for="file-upload" class="absolute left-3 top-1/2 transform -translate-y-1/2 cursor-pointer w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center text-white hover:bg-gray-800 transition duration-300 transform hover:scale-105">
+          <i class="fas fa-upload text-base"></i>
+        </label>
+      
         <input type="text" 
-               placeholder="Type your message..." 
+               placeholder="Talk to me.." 
                (keyup.enter)="sendData()" 
-               class="p-4 border border-border rounded-lg shadow focus:outline-none focus:ring focus:ring-ring flex-grow transition duration-300 hover:border-primary text-black"
+               class="p-4 pl-14 pr-10 border h-[50px] border-border rounded-full shadow focus:outline-none focus:ring focus:ring-ring flex-grow transition duration-300 hover:border-primary text-black"
                [(ngModel)]="prompt" />
+      
         <button (click)="sendData()" [disabled]="loading" 
-                class="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-6 py-3 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed">
-          Talk
+                class="absolute inset-y-2 right-2.5 w-8 h-8 rounded-full bg-gray-400 text-white flex items-center justify-center hover:bg-gray-800 transition duration-300 transform hover:scale-105 disabled:bg-gray-800 disabled:text-gray-200 disabled:cursor-not-allowed">
+          <i class="fas fa-paper-plane text-base"></i>
         </button>
       </div>
+      
+      <div class="">
+      <app-footer class="text-yellow-500 p-4 text-center">
+      </app-footer>
+    </div>
+    
     </div>
   </main>
 </div>
 
-
-<!-- <app-footer class="w-full text-yellow-500 p-4 text-center">
-  <p>&copy; 2024 Your Company. All rights reserved.</p>
-</app-footer> -->
