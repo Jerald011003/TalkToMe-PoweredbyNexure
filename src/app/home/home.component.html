@@ -1,6 +1,8 @@
 <div class="flex h-screen bg-background">
 
-  <aside #sidebar class="w-1/4 max-w-xs bg-card p-6 border-r border-border shadow-lg relative">
+  <aside #sidebar id="sidebar" 
+  class="w-1/4 max-w-xs bg-card p-6 border-r border-border shadow-lg relative"
+  *ngIf="isSidebarVisible">
     <button 
       class="absolute top-3 p-1 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition duration-300 transform hover:scale-105"
       (click)="toggleSidebar(false)">
@@ -55,7 +57,7 @@
             <button #openSidebarBtn 
                 class="fixed top-4 left-4 p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition duration-300 transform hover:scale-105" 
                 (click)="toggleSidebar(true)" 
-                style="display: none;">
+                *ngIf="!isSidebarVisible">
                 <i class="fas fa-bars text-xl"></i>
             </button>
 

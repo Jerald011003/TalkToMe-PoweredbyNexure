@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID, ViewChild, ElementRef, inject } from '@angular/core';
+import { Component, HostListener, OnInit, Inject, PLATFORM_ID, ViewChild, ElementRef, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from '../footer/footer.component';
@@ -16,12 +16,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  email: string | null = null; 
+  email: string | null = null;
   userInput: string = '';
   responses: { title: string; description: string }[] = [];
-  
+  isSidebarVisible: boolean = true;
+  isSidebarOpen = false;
   prompt: string = '';
-  geminiService: GeminiService = inject(GeminiService)
+  geminiService: GeminiService = inject(GeminiService);
   loading: boolean = false;
   chatHistory: any[] = [];
 
@@ -39,14 +40,30 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    if (isPlatformBrowser(this.platformId)) {
+      if (window.innerWidth < 1024) { 
+        this.isSidebarVisible = false;
+      } else {
+        this.isSidebarVisible = true;
+      }
+    }
+  }
+
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.checkGoogleToken();
+      if (window.innerWidth < 1024) { 
+        this.isSidebarVisible = false; 
+      } else {
+        this.isSidebarVisible = true; 
+      }
     }
   }
 
   private checkGoogleToken(): void {
-    const token = localStorage.getItem('googleToken'); 
+    const token = localStorage.getItem('googleToken');
     if (token) {
       this.decodeToken(token);
     }
@@ -55,7 +72,7 @@ export class HomeComponent implements OnInit {
   private decodeToken(token: string): void {
     try {
       const decoded: any = jwtDecode(token);
-      this.email = decoded.email || null; 
+      this.email = decoded.email || null;
     } catch (error) {
       console.error('Error decoding token:', error);
     }
@@ -80,13 +97,21 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/']);  
   }
 
-  toggleSidebar(show: boolean): void {
-    if (show) {
-      this.sidebar.nativeElement.style.display = 'block';
-      this.openSidebarBtn.nativeElement.style.display = 'none';
+  toggleSidebar(isOpen: boolean) {
+    this.isSidebarOpen = isOpen;
+  
+    this.isSidebarVisible = this.isSidebarOpen;
+  
+    const sidebar = document.querySelector('#sidebar');
+    const openSidebarBtn = document.querySelector('#openSidebarBtn');
+  
+    if (this.isSidebarOpen) {
+      sidebar?.classList.remove('hidden'); 
+      openSidebarBtn?.classList.add('hidden');
     } else {
-      this.sidebar.nativeElement.style.display = 'none';
-      this.openSidebarBtn.nativeElement.style.display = 'block';
+      sidebar?.classList.add('hidden'); 
+      openSidebarBtn?.classList.remove('hidden');
     }
   }
+  
 }
