@@ -3,19 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-    width: 100%;
+/* body {
     margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    font-family: Arial, sans-serif;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  .content {
-    position: relative;
-    z-index: 10; /* Ensure content appears above sidebar */
-  }
+} */
