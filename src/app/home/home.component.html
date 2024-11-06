@@ -1,7 +1,14 @@
-<div class="flex h-screen bg-background">
+<div class="flex h-screen bg-background relative">
 
+  <!-- Sidebar: Dynamically change width, position, and z-index -->
   <aside #sidebar id="sidebar" 
-    class="w-1/4 max-w-xs bg-card p-6 border-r border-border shadow-lg relative sm:absolute sm:left-0 sm:top-0 sm:w-full sm:h-full sm:bg-white sm:shadow-lg sm:z-50"
+    class="w-1/4 max-w-xs bg-card p-6 border-r border-border shadow-lg absolute top-0 left-0 sm:relative sm:left-0 sm:top-0 sm:w-1/4 sm:h-full sm:bg-white sm:shadow-lg"
+    [ngClass]="{
+      'w-2/4': isSidebarVisible, 
+      'absolute top-0 left-0 z-50': isSidebarVisible,  
+      'sm:relative': !isSidebarVisible, 
+      'sm:h-full': true  
+    }"
     *ngIf="isSidebarVisible">
     <button 
       class="absolute top-3 p-1 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition duration-300 transform hover:scale-105"
@@ -45,7 +52,8 @@
     </div>
   </aside>
 
-  <main class="flex-1 p-10 bg-card">
+  <!-- Main Content: Ensure it doesn't overlap with the sidebar -->
+  <main class="flex-1 p-10 bg-card sm:pl-1 sm:pr-1 sm:ml-1 sm:mt-1 sm:relative z-0">
     <div class="flex flex-col items-center justify-center h-full">
       <div class="w-full max-w-2xl overflow-y-auto rounded-lg mb-4">
         <section class="response-container w-full text-black p-6">
