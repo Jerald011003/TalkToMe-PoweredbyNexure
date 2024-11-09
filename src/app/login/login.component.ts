@@ -1,52 +1,27 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
-import { environment } from '../../environments/environment';
-
-declare global {
-  interface Window {
-    onGoogleLoginSuccess: (response: any) => void;
-  }
-}
+// login.component.ts
+import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
-  isLoading: boolean = false;
-  
-  google_client = environment.googleClient
+export class LoginComponent {
+  email: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      window.onGoogleLoginSuccess = this.onGoogleLoginSuccess.bind(this);
-    }
-
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
-  }
-
-  onGoogleLoginSuccess(response: any): void {
-    const token = response.credential; 
-    localStorage.setItem('googleToken', token); 
-    this.router.navigate(['/dashboard']);
-  }
-
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      this.isLoading = true;
-    }
+  onLogin() {
+    this.authService.login(this.email, this.password)
+      .then((result) => {
+        console.log('Logged in successfully:', result);
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
+        console.error('Login error:', error);
+      });
   }
 }

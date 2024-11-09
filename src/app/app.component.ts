@@ -11,6 +11,10 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SkeletonComponent } from './skeleton/skeleton.component';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
+import { firebaseConfig } from '../environments/firebaseenvironment';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -31,6 +35,8 @@ export class AppComponent {
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAnalyticsModule,
     
   ],
   exports: [

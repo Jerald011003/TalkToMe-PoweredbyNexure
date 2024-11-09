@@ -1,34 +1,14 @@
-<div class="flex items-center justify-center min-h-screen bg-gray-100">
-  <div class="flex bg-white rounded-lg shadow-lg p-10 w-full max-w-lg items-center">
-    
-    <div class="mr-8 flex-shrink-0">
-      <img src="/TTA_logo.png" alt="Logo" class="w-20 h-20">
-    </div>
+<!-- login.component.html -->
+<div class="login-form">
+  <h2>Login</h2>
+  <form (ngSubmit)="onLogin()">
+    <label for="email">Email:</label>
+    <input type="email" [(ngModel)]="email" name="email" required />
 
-    <div class="w-full">
-      <h1 class="text-2xl font-bold text-center mb-6">Sign In</h1>
-      
-      <div class="mt-6 flex justify-center">
-        <div id="g_id_onload"
-             [attr.data-client_id]="google_client"
-             data-context="signin"
-             data-ux_mode="popup"
-             data-login_uri="http://localhost:4200/"
-             data-itp_support="true"
-             data-callback="onGoogleLoginSuccess">
-        </div>
+    <label for="password">Password:</label>
+    <input type="password" [(ngModel)]="password" name="password" required />
 
-        <div class="g_id_signin"
-             data-type="standard"
-             data-shape="pill"
-             data-theme="filled_black"
-             data-text="signin"
-             data-size="large"
-             data-logo_alignment="left"
-             data-width="260">
-        </div>
-      </div>
-      
-    </div>
-  </div>
+    <button type="submit">Login</button>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  </form>
 </div>
