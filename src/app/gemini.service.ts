@@ -3,12 +3,6 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 
-// console.log('Supabase Url:', environment.supabaseUrl);
-// console.log('Supabase Key:', environment.supabaseKey);
-// console.log('Gemini Key:', environment.geminiKey);
-// console.log('Google Client:', environment.googleClient);
-
-
 @Injectable({
   providedIn: 'root'
 })
