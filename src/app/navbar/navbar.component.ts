@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FirebaseAuthService } from '../firebase-auth.service';  // Import FirebaseAuthService
+import { FirebaseAuthService } from '../firebase-auth.service'; 
 
 @Component({
   selector: 'app-navbar',
@@ -25,8 +25,7 @@ export class AppNavbarComponent {
   navigateToAbout() {
     this.router.navigate(['/about']);
   }
-
-  // Logout method
+  
   logout() {
     this.authService.signOutUser().then(() => { 
       console.log('User logged out');

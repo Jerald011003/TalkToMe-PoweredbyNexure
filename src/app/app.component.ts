@@ -43,8 +43,6 @@ export class AppComponent {
   title = 'AngularApp';
 
   constructor(private firebaseService: FirebaseService) {
-    // Firebase is already initialized by FirebaseService
     console.log('AppComponent initialized');
   }
-
 }

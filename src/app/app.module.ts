@@ -17,35 +17,17 @@ import { AppNavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 
-import { FirebaseService } from './firebase.service';  // Import FirebaseService
+import { FirebaseService } from './firebase.service';  
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
-import { SkeletonComponent } from './skeleton/skeleton.component';
-// const firebaseConfig = {
-//   apiKey: "AIzaSyARXZOiWbpouDLZQX5Jg8gXkGcDIOy8TVc",
-//   authDomain: "talk-to-me-63d17.firebaseapp.com",
-//   projectId: "talk-to-me-63d17",
-//   storageBucket: "talk-to-me-63d17.firebasestorage.app",
-//   messagingSenderId: "263087346884",
-//   appId: "1:263087346884:web:8dafa07008811750862591",
-//   measurementId: "G-FP2ZF8LGNY"
-// };
 
-// const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+
 
 
 @NgModule({
   declarations: [
-    // AppComponent,
     LoginComponent,
     RegisterComponent,
-    // AppNavbarComponent,
-    // FooterComponent,
-    // HomeComponent,
-    // SkeletonComponent
-
-
   ],
   imports: [
     BrowserModule,
@@ -53,7 +35,7 @@ import { SkeletonComponent } from './skeleton/skeleton.component';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [FirebaseService],  // Add FirebaseService to providers
+  providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

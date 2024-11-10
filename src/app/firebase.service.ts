@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getAnalytics, isSupported } from 'firebase/analytics';  // Import isSupported
-
-import { environment } from '../environments/environment';  // Import the Firebase config
+import { getAnalytics, isSupported } from 'firebase/analytics'; 
+import { environment } from '../environments/environment'; 
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +9,8 @@ import { environment } from '../environments/environment';  // Import the Fireba
 export class FirebaseService {
 
   constructor() {
-    // Initialize Firebase with the configuration
     const app = initializeApp(environment.firebaseConfig);
 
-    // Check if Analytics is supported before initializing it
     isSupported().then((supported) => {
       if (supported) {
         const analytics = getAnalytics(app);

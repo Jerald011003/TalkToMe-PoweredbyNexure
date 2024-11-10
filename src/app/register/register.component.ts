@@ -18,7 +18,7 @@ export class RegisterComponent {
     this.authService.signUp(this.email, this.password)
       .then(userCredential => {
         console.log('User registered:', userCredential.user);
-        this.router.navigate(['/dashboard']); // Redirect to dashboard after successful registration
+        this.router.navigate(['/dashboard']); 
       })
       .catch(error => {
         this.error = error.message;

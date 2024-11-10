@@ -15,11 +15,10 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     
     if (this.authService.isAuthenticated()) {
-      return true;  // User is authenticated, allow access
+      return true; 
     } else {
-      // Show an alert or message
       alert('You need to log in first to access this page.');
-      this.router.navigate(['/login']);  // Redirect to login if not authenticated
+      this.router.navigate(['/login']); 
       return false;
     }
   }
