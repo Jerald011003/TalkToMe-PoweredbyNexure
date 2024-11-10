@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FirebaseAuthService } from '../firebase-auth.service';  // Import FirebaseAuthService
 
 @Component({
   selector: 'app-navbar',
@@ -11,8 +12,11 @@ import { CommonModule } from '@angular/common';
 })
 export class AppNavbarComponent {
   isMenuOpen: boolean = false;
+  userEmail: string | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: FirebaseAuthService) {
+    this.userEmail = this.authService.getCurrentUserEmail();  
+  }
 
   navigateToHome() {
     this.router.navigate(['/dashboard']);  
@@ -22,12 +26,13 @@ export class AppNavbarComponent {
     this.router.navigate(['/about']);
   }
 
-  // logout() {  
-  //   localStorage.removeItem('googleToken');
-  //   this.router.navigate(['/']).then(() => {
-  //     window.location.reload();
-  //   });
-  // }
-  
-  
+  // Logout method
+  logout() {
+    this.authService.signOutUser().then(() => { 
+      console.log('User logged out');
+      this.router.navigate(['/login']);  
+    }).catch((error) => {
+      console.error('Error during sign-out:', error); 
+    });
+  }
 }

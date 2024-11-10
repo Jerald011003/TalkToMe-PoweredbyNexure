@@ -16,6 +16,8 @@
       (click)="toggleSidebar(false)">
       <i class="fas fa-pencil-alt text-xl"></i>
     </button>
+
+
   
     <div class="mt-7">
       <h3 class="text-sm font-bold p-1 text-gray-700">Today</h3>
@@ -48,9 +50,14 @@
   </aside>
 
   <main class="flex-1 p-10 bg-card sm:pl-1 sm:pr-1 sm:ml-1 sm:mt-1 sm:relative" >
+    <app-navbar class="fixed right-4 -mt-5 mr-2"></app-navbar>
+
     <div class="flex flex-col items-center justify-center h-full">
+
       <div class="w-full max-w-2xl overflow-y-auto rounded-lg mb-4">
+
         <section class="response-container w-full text-black p-6">
+
           <div class="responses flex flex-col space-y-4">
             <button #openSidebarBtn 
               class="fixed top-4 left-4 p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition duration-300 transform hover:scale-105" 
@@ -58,7 +65,6 @@
               *ngIf="!isSidebarVisible">
               <i class="fas fa-bars text-xl"></i>
             </button>
-
             <h2 *ngIf="!chatHistory.length" class="text-3xl font-semibold text-primary text-black text-center">
               What can I help with?
             </h2>

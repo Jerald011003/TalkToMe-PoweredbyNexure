@@ -13,7 +13,24 @@ import { SkeletonComponent } from './skeleton/skeleton.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
-import { firebaseConfig } from '../environments/firebaseenvironment';
+import { environment } from '../environments/environment';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+
+import { FirebaseService } from './firebase.service';  // Import the service
+
+const firebaseConfig = {
+  apiKey: "AIzaSyARXZOiWbpouDLZQX5Jg8gXkGcDIOy8TVc",
+  authDomain: "talk-to-me-63d17.firebaseapp.com",
+  projectId: "talk-to-me-63d17",
+  storageBucket: "talk-to-me-63d17.firebasestorage.app",
+  messagingSenderId: "263087346884",
+  appId: "1:263087346884:web:8dafa07008811750862591",
+  measurementId: "G-FP2ZF8LGNY"
+};
 
 @Component({
   selector: 'app-root',
@@ -24,24 +41,10 @@ import { firebaseConfig } from '../environments/firebaseenvironment';
 })
 export class AppComponent {
   title = 'AngularApp';
-}
 
-@NgModule({
-  declarations: [
-    LoginComponent,
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAnalyticsModule,
-    
-  ],
-  exports: [
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
+  constructor(private firebaseService: FirebaseService) {
+    // Firebase is already initialized by FirebaseService
+    console.log('AppComponent initialized');
+  }
+
+}
